@@ -105,7 +105,7 @@ export const batchDownloadFile = async (accessToken: string, env: string, fileid
     if (data.errcode !== 0) {
       throw new Error(data.errmsg)
     }
-    return data.file_list[0].download_url
+    return encodeURI(data.file_list[0].download_url)
   } catch (error) {
     ctx.log.warn('#wxcloud: 获取图片链接失败...')
     throw error
