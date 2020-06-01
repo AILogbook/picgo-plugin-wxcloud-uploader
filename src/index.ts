@@ -10,7 +10,12 @@ const handle = async (ctx: picgo): Promise<picgo> => {
   try {
     let imgList = ctx.output
     for (let i in imgList) {
-      const realPath = `${path}${imgList[i].fileName}`
+
+      //修改文件名
+      let d = new Date(+ new Date() + 8*3600*1000)
+      d = d.toISOString().replace(/\D/g,"").slice(0,12)+"_"
+
+      const realPath = `${path}${d}${imgList[i].fileName}`
       let image = imgList[i].buffer
       if (!image && imgList[i].base64Image) {
         image = Buffer.from(imgList[i].base64Image, 'base64')
